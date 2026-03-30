@@ -1,5 +1,7 @@
 import {test, expect, Locator} from '@playwright/test';
 
+test.setTimeout(60000);//total test time out 60 sec, test will fail after 60 sec
+
 test("Auto Suggest Dropdown",async ({page})=>{
 
    await page.goto("https://www.flipkart.com/");
@@ -63,26 +65,28 @@ test("Auto Suggest Dropdown",async ({page})=>{
 })
 
 
-test("Bootstrap Dropdown",async({page})=>{
+test.only("Bootstrap Dropdown",async({page})=>{
 
-   await page.goto("------");
+   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+   //await page.waitForTimeout(3000);
 
 //1. Get the "Job Title dropdown count"
 
    //Login
-   await page.locator("-----").fill("Admin");
-   await page.locator("-----").fill("admin123");
-   await page.locator("-----").click();
-
+   await page.locator("input[name='username']").fill("Admin");
+   await page.locator("input[name='password']").fill("admin123");
+   await page.locator("button[type='submit']").click();
+   //await page.waitForTimeout(3000);
    //Go to PIM
    await page.getByText("PIM").click();
+   //await page.waitForTimeout(3000);
 
    //Click Job Title field down arrow
-   await page.locator("-----").nth(2).click();
-   await page.waitForTimeout(3000);
+   await page.locator(".oxd-icon.bi-caret-down-fill.oxd-select-text--arrow").nth(2).click();
+   await page.waitForTimeout(2000);
 
    //Get the listed values on the dropdwon
-   const options:Locator = page.locator("-----");
+   const options:Locator = page.locator("div[role='listbox'] div");
    const optionsCount = await options.count();
    console.log("Dropdown Values : ", optionsCount);
 
@@ -100,7 +104,7 @@ test("Bootstrap Dropdown",async({page})=>{
    
 
 //3. Select the 'Automation Tester' option
-   const searchData = "Automation Tester";
+   const searchData = "Automaton Tester";
    for (let index = 0; index < optionsCount ; index++) {
 
       const result = await options.nth(index).textContent();
@@ -111,5 +115,5 @@ test("Bootstrap Dropdown",async({page})=>{
       } 
 
    }
-   await page.waitForTimeout(5000);
+   await page.waitForTimeout(2000);
 })
