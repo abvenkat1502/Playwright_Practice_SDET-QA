@@ -1,5 +1,4 @@
 import{test, expect, Locator} from "@playwright/test";
-import { log } from "node:console";
 
 test("Comparing Methods",async({page})=>{
 
