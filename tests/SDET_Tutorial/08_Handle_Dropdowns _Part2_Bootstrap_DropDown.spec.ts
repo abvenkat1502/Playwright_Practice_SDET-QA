@@ -9,7 +9,7 @@ test("Auto Suggest Dropdown",async ({page})=>{
    await page.waitForTimeout(5000);
    await page.getByText("✕").click();
 
-   //1. get all the suggest value on the drop down and print that count. ---> Ctrl+Shift+p ---> emulate focuse page
+   //1. get all the suggested values on the drop down and print that count. ---> Ctrl+Shift+p ---> emulate focus page
    await page.locator("form input[name='q']").fill("Smart");
    await page.waitForTimeout(3000);
    const searchList:Locator = page.locator("form li");
@@ -31,8 +31,8 @@ test("Auto Suggest Dropdown",async ({page})=>{
       console.log("Search Result is : ", await searchList.nth(index).innerText());
    }
 
-   //4. get all the suggest value on the drop down and print the value using allTextContent()
-   console.log("-----Using allTextContent()-----");
+   //4. get all the suggest value on the drop down and print the value using allTextContents()
+   console.log("-----Using allTextContents()-----");
    const alltext1:string[] = await searchList.allTextContents();
    for (const element of alltext1) {
       console.log("Search Result is : ", element);
@@ -90,8 +90,8 @@ test.only("Bootstrap Dropdown",async({page})=>{
    const optionsCount = await options.count();
    console.log("Dropdown Values : ", optionsCount);
 
-//2. get all the suggest value on the drop down and print the value using allTextContent(), allInnerText(), textContent() and innerText()
-   console.log("-----Using allTextContent() & allInnerText()-----");
+//2. get all the suggest value on the drop down and print the value using allTextContents(), allInnerTexts(), textContent() and innerText()
+   console.log("-----Using allTextContents() & allInnerTexts()-----");
    console.log("All Text Content Is : ", await options.allTextContents());
    console.log("All Inner Text Is : ", await options.allInnerTexts());
    console.log("-----Using textContent() & innerText()-----");
