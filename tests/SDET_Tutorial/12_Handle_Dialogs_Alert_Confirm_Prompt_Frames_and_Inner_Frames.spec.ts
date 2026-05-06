@@ -1,4 +1,4 @@
-import test, {expect, Frame} from '@playwright/test'
+import {test, expect, Frame} from '@playwright/test'
 
 test("Simple Alert",async({page})=>{
 
