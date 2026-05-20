@@ -61,7 +61,7 @@ test("Handling Tab/Pages",async({})=>{
    console.log("Child Page Title", await childPage.title());
 });
 
-test.only("Handle child windows",async()=>{
+test("Handle child windows",async()=>{
 
     const browser = await chromium.launch();
     const context = await browser.newContext();
@@ -87,8 +87,30 @@ test.only("Handle child windows",async()=>{
         if(windowTitle.includes("Playwright")){
             await window.locator(".getStarted_Sjon").click();
             await page.waitForTimeout(5000);
+            expect(await window.title()).toContain("Installation")
+            console.log("CURRENT PAGE TITTLE," + await window.title());
             await window.close();
         }
     }
     
 });
+
+test("Authendicator Popup Approach 1", async()=>{
+
+    const browser = await chromium.launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+    await page.waitForTimeout(5000);
+
+})
+
+test("Authendicator Popup Approach 2", async()=>{
+
+    const browser = await chromium.launch();
+    const context = await browser.newContext({httpCredentials:{username:'admin',password:'admin'}});
+    const page = await context.newPage();
+    await page.goto("https://the-internet.herokuapp.com/basic_auth");
+    await page.waitForTimeout(5000);
+
+})
