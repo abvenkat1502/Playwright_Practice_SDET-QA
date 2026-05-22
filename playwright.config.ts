@@ -15,7 +15,7 @@ export default defineConfig({
   testDir: './tests',
 
   //To change the timeout globally for all tests (default is 30000 ms/30 secs) - BY AB
-  //timeout:60000,
+  timeout:60000,
 
   
   //To apply a longer wait for all expect conditions (default is 5000 ms/5 secs) by pavan 
